@@ -6,16 +6,29 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "axios": "^1.6.1",
+    "classnames": "^2.3.2",
+    "feed-read-parser": "^1.0.5",
+    "framer-motion": "^10.16.5",
+    "gh-pages": "^6.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.18.0",
     "react-scripts": "5.0.1",
+    "rss-parser": "^3.13.0",
+    "rss-parser-browser": "^2.2.2",
+    "rss-to-json": "^2.1.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && gh-pages -d dist",
+    "format": "prettier --write \"**/*.tsx\""
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +47,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^3.1.0",
+    "sass": "^1.69.5",
+    "stylelint": "^15.11.0"
   }
 }

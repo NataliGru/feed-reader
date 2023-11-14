@@ -1,0 +1,50 @@
+@import './utils/variabels.scss';
+@import './utils/mixins.scss';
+
+.header {
+  box-sizing: border-box;
+  padding-block: 10px;
+  padding-inline: 20px;
+  height: 100px;
+  width: 100%;
+
+  margin-bottom: 50px;
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+
+  
+  background-color: $midDarkColor;
+
+  @include onTablet {
+    padding-inline: 40px;
+  }
+
+  @include onDesktop {
+    padding-inline: 80px;
+  }
+
+  &__buttons {
+    align-items: flex-end;
+  }
+}
+
+
+.log-status { 
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 5px;
+}
+
+.log {
+  align-self: flex-end;
+  height: 50px;
+
+  &-out{
+    transform: scaleX(-1);
+  }
+}

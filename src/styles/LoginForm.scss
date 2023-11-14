@@ -1,0 +1,149 @@
+@import './utils/variabels.scss';
+@import './utils/mixins.scss';
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+
+  width: 50%;
+
+  padding: 60px;
+  border-radius: 5px;
+
+  box-shadow: 10px 10px 20px rgba(24, 25, 63, 0.4);
+
+  &__title{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 10px;
+    padding-bottom: 30px;
+    align-self: center;
+    color: $accentColor;
+    text-shadow: 5px -2px 4px rgba(24, 25, 63, 0.4);
+    font-size: 35px;
+    transition: all 0.3s;
+
+    &:hover {
+      font-size: 40px;
+    }
+  } 
+
+
+  &__submit {
+    box-sizing: border-box;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid;
+    background-color: $darkColor;
+    border-radius: 25px;
+    border-color: $extraDarkColor;
+
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+  }
+}
+
+.input {
+  position: relative;
+  height: 20px;
+  margin-bottom: 100px;
+
+  @include onTablet {
+    margin-bottom: 50px;
+
+  }
+
+  &__area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 95%;
+    height: 100%;
+    border: 2px solid $midColor;
+    border-radius: 25px;
+    color: $darkColor;
+    margin-bottom: 20px;
+
+    outline: none;
+    padding: 8px;
+    background: none;
+    z-index: 1;
+
+    &:focus {
+      border: 2px solid $darkColor;
+      box-shadow: 0 3px 9px rgba(24,25,63, 0.4);
+    }
+
+  }
+
+  &__label {
+    position: absolute;
+    height: 25px;
+    right: 10px;
+    top: 5px;
+
+    background-color: transparent;
+    border: none;
+    color: $midColor;
+    font-size: 16px;
+    transition: all 0.3s;
+    z-index: 2;
+  }
+
+  &__icon {
+    height: 30px;
+  }
+}
+
+.error__username {
+  &::after {
+    content: 'Invalid username format. Please use only letters.';
+    position: absolute;
+    width: 100%;
+    color: darkred;
+    font-weight: bold;
+    font-size: 14px;
+    top: 210%;
+    text-align: center;
+  }
+}
+.error__password {
+  &::after {
+    content: 'Password must be at least 8 characters long.';
+    position: absolute;
+    width: 100%;
+    color: darkred;
+    font-weight: bold;
+    font-size: 14px;
+    top: 210%;
+    text-align: center;
+  }
+}
+
+.password-toggle {
+  cursor: pointer;
+}
+
+@import './utils/variabels.scss';
+
+.button {
+  box-sizing: border-box;
+  padding: 10px;
+  cursor: pointer;
+  border: 2px solid $darkColor;
+  background-color: $midDarkColor;
+  border-radius: 25px;
+
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+  transition: box-shadow 0.3s;
+
+  &:hover {
+    box-shadow: 0 3px 9px rgba(24, 25, 63, 0.4);
+  }
+}
+
