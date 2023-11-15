@@ -12,6 +12,10 @@ export const Header: React.FC = () => {
 
   return (
     <div className="header">
+      <h1 className="header__title">
+        Feed
+      </h1>
+
       {user && (
         <div className="account__info">
           <div className="account__log-buttons">
@@ -22,7 +26,7 @@ export const Header: React.FC = () => {
                 className="log account__icon"
               />
             </button>
-            
+
             <motion.button
               className="log log-status"
               onClick={logout}
