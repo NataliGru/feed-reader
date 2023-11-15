@@ -1,0 +1,41 @@
+@import './utils/variabels.scss';
+
+.feed {
+   &__open {
+    position: fixed;
+    bottom: 10px;
+    left: -10px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    padding: 10px;
+
+    &::after {
+      content: 'Create new feed';
+      font-size: 14px;
+      color: #fff;
+      background-color: $darkColor;
+      border-radius: 5px;
+      padding: 5px;
+      position: absolute;
+      top: -5px;
+      left: 45px;
+      width: 150%;
+      opacity: 0;
+  
+      transition: all 0.3s;
+    }
+
+    &:hover {
+      &::after {
+        opacity: 1;
+      }
+    }
+   }
+
+   &__create {
+    display: block;
+    height: 50px;
+   }
+
+}

@@ -7,7 +7,6 @@ import '../styles/LoginForm.scss';
 import userIcon from '../img/account-icon-small.png';
 import closedEye from '../img/closed-eye-icon.png';
 import openedEye from '../img/opened-eye-icon.png';
-import { useNavigate } from 'react-router-dom';
 import { useUserContext } from '../context/UserContext';
 
 export const LoginForm: React.FC = () => {
@@ -19,9 +18,7 @@ export const LoginForm: React.FC = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const { user, login } = useUserContext()
-
-  const navigate = useNavigate();
+  const { login } = useUserContext();
 
   const handleSetUserName = (event: ChangeEvent<HTMLInputElement>) => {
     setUserName(event.target.value.trim());
@@ -79,7 +76,7 @@ export const LoginForm: React.FC = () => {
 
   return (
     <div className="login">
-      <h1 className='login__title'>Login</h1>
+      <h1 className="login__title">Login</h1>
 
       <div className="input-container">
         <div
@@ -132,9 +129,9 @@ export const LoginForm: React.FC = () => {
           </button>
         </div>
       </div>
-        <motion.button 
+      <motion.button
         onClick={handleLogin}
-        className="button" 
+        className="button"
         whileHover={{ scale: 1.2 }}
         whileTap={{ scale: 0.9 }}
         transition={{ type: 'spring', stiffness: 400, damping: 17 }}

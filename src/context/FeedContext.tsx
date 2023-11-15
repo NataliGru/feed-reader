@@ -6,8 +6,8 @@ import { Feed } from '../types/Feed';
 type FeedContextType = {
   feeds: Feed[];
   loadFeeds: () => void;
-  addFeed: (title: string, body: string) => Promise<void>;
-  editFeed: (feedId: number, title: string, body: string) => Promise<void>;
+  addFeed: (newFeed: Feed) => void;
+  editFeed: (editedfeed: Feed) => void;
   deleteFeed: (feedId: number) => void;
 };
 
@@ -25,8 +25,10 @@ export const FeedContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const [feeds, setFeeds] = useState<Feed[]>([]);
 
   const { user } = useUserContext();
-  
+
   const loadFeeds = () => {
+    const localStorageFeed = JSON.parse(localStorage.getItem('feeds') || '[]')
+    
     if (user) {
       feedService.getFeeds(user.id)
       .then(Response => {
@@ -37,29 +39,33 @@ export const FeedContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
         console.error('Error loading feeds:', Error);
       });
     }
+
+    if (localStorageFeed) {
+      setFeeds(prev => [localStorageFeed, ...prev])
+    }
   };
 
-  const addFeed = async (title: string, body: string) => {
+  const addFeed = (newFeed: Feed) => {
     if (user) {
       try {
-        const response = await feedService.addFeed(user.id, title, body);
+        feedService.addFeed(newFeed);
 
-        setFeeds(prev => [response.data, ...prev]);
+        setFeeds(prev => [newFeed, ...prev]);
       } catch (error) {
         console.error('Error adding feed:', error);
       }
     }
   };
   
-  const editFeed = async (feedId: number, title: string, body: string) => {
-    const isFeedExist = feeds.some(feed => feed.id === feedId);
+  const editFeed = (editedFeed: Feed) => {
+    const isFeedExist = feeds.some(feed => feed.id === editedFeed.id);
 
     if (isFeedExist) {
       try {
-        const response = await feedService.editFeed(feedId, title, body);
+        feedService.editFeed(editedFeed);
 
         setFeeds(prev => prev.map(
-          feed => feed.id === feedId ? response.data : feed
+          feed => feed.id === editedFeed.id ? editedFeed : feed
         ));
       } catch (error) {
         console.error('Error editing feed:', error);
@@ -68,17 +74,18 @@ export const FeedContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
   };
 
   const deleteFeed = async (feedId:  number) => {
-    const isFeedExist = feeds.some(feed => feed.id === feedId);
+    const feedForDelete = feeds.find(feed => feed.id === feedId);
 
-    if (isFeedExist) {
+    if (feedForDelete) {
       try {
-        feedService.deleteFeed(feedId);
-        
         setFeeds(prev => prev.filter(
           feed => feed.id === feedId
-        ));
+          ));
+
+          feedService.deleteFeed(feedId);
       } catch (error) {
         console.error('Error deleting feed:', error);
+        setFeeds(prev => [feedForDelete, ...prev]);
       }
     }
   };

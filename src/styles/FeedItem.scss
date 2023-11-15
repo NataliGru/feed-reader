@@ -1,0 +1,46 @@
+.feed {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5px;
+  
+  width: 100%;
+  height: auto;
+
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(24, 25, 63, 0.4);
+
+  &__data {
+    display: flex;
+    flex-direction: column;
+  }
+  &__title {
+    font-size: 20px;
+    color: black;
+  }
+
+  &__body {
+    font-size: 14px;
+    color: black;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 5px;
+  }
+
+  &__label {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+
+    background-color: transparent;
+    border: none;
+  }
+
+  &__icon {
+    height: 30px;
+  }
+}
