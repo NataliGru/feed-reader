@@ -1,12 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import { getUser } from '../api/user';
 import { useNavigate } from 'react-router-dom';
-
-type User = {
-  id: number;
-  username: string;
-  password: string;
-};
+import { User } from '../types/User';
 
 type UserContextType = {
   user: User | null;
@@ -26,8 +21,7 @@ export const useUserContext = () => {
 
 export const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-
-console.log(user)
+  console.log(user)
 
   const navigate = useNavigate();
 
@@ -36,7 +30,7 @@ console.log(user)
   const login = () => {
     getUser(USERNAME)
       .then(Response => {
-        const userData = Response.data;
+        const userData: User = Response.data[0];
 
         setUser(userData);
       navigate('/feed', { replace: true })

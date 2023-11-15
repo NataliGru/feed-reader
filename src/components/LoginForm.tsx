@@ -71,6 +71,12 @@ export const LoginForm: React.FC = () => {
     }
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleLogin();
+    }
+  };
+
   return (
     <div className="login">
       <h1 className='login__title'>Login</h1>
@@ -89,6 +95,7 @@ export const LoginForm: React.FC = () => {
             onChange={handleSetUserName}
             onFocus={handleUserNameFocus}
             onBlur={handleUserNameBlur}
+            onKeyDown={handleKeyDown}
           />
           <button className="input__label">
             <img src={userIcon} alt="user-icon" className="input__icon" />
@@ -108,6 +115,7 @@ export const LoginForm: React.FC = () => {
             onChange={handleSetPassword}
             onFocus={handlePasswordFocus}
             onBlur={handlePasswordBlur}
+            onKeyDown={handleKeyDown}
           />
           <button
             className={classNames('input__label', {
