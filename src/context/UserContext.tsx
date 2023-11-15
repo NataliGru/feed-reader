@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { getUser } from '../api/user';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../types/User';
@@ -21,11 +21,21 @@ export const useUserContext = () => {
 
 export const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  console.log(user)
+  console.log(user, 'settled')
 
+  
   const navigate = useNavigate();
-
+  
   const USERNAME = 'Delphine';
+  
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setUser(parsedUser);
+      navigate('/feed', { replace: true });
+    }
+  }, []); 
 
   const login = () => {
     getUser(USERNAME)
@@ -33,14 +43,15 @@ export const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
         const userData: User = Response.data[0];
 
         setUser(userData);
-      navigate('/feed', { replace: true })
-
+        localStorage.setItem('user', JSON.stringify(userData))
+        navigate('/feed', { replace: true });
       } )
       .catch(Error => console.log(Error));
   };
-
+    
   const logout = () => {
     setUser(null);
+    localStorage.removeItem('user');
     navigate('/', { replace: true }); 
   };
 
